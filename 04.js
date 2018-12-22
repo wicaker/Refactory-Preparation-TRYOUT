@@ -1,23 +1,23 @@
 let daftarProduk = [
   {
-    kodeProduk : 1,
+    kodeProduk : '1',
     namaProduk : 'Indomie',
     harga : 2500,
   },
   {
-    kodeProduk : 2,
+    kodeProduk : '2',
     namaProduk : 'Teh Botol',
     harga : 3000,
   },
   {
-    kodeProduk : 3,
+    kodeProduk : '3',
     namaProduk : 'Pulpen',
     harga : 5000,
   },
   {
-    kodeProduk : 4,
+    kodeProduk : '4',
     namaProduk : 'Pensil',
-    harga : 1000,
+    harga : 1000
   }
 ];
 
@@ -51,9 +51,34 @@ const lihatCart = (kodeProduk) => {
   }
   totalItem(daftarBelanja.items);
   totalBelanja(daftarBelanja.items);
-  return daftarBelanja;
+  return console.log(daftarBelanja);
 }
 
-lihatCart(1);
-lihatCart(2);
-lihatCart(3);
+
+//HTML
+let tabel = [];
+for(let i=0; i< daftarProduk.length ;i++){
+  tabel.push(`<tr>
+    <td>${daftarProduk[i].kodeProduk}</td>
+    <td>${daftarProduk[i].namaProduk}</td>
+    <td>${daftarProduk[i].harga}</td>
+    <td><a class="waves-effect waves-light btn" onClick='beli(${daftarProduk[i].kodeProduk})' >Beli</a></td>
+  </tr>`);
+}
+document.getElementById('list-produk').innerHTML=tabel.join('');
+
+const beli = (id) => {
+  lihatCart(id);
+  let tabelBelanja=[];
+  let items = [];
+  for(let i=0; i<daftarBelanja.items.length;i++){
+    items.push(daftarBelanja.items[i].namaProduk);
+  }
+  tabelBelanja.push(`<tr>
+    <td>${daftarBelanja.totalBelanja}</td>
+    <td>${daftarBelanja.totalItem}</td>
+    <td>${items}</td>
+  </tr>`);
+  return document.getElementById('list-belanja').innerHTML=tabelBelanja;
+}
+
